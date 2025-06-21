@@ -3,9 +3,9 @@
 一个本地部署的自动化照片水印工具，为您的摄影作品增添专业签名。我本人是用在nas上面的，亦可运行于任何Linux设备，如果用在Windows上请自行修改。
 
 
-![](C:\Users\Gladious\Desktop\干活\AutoExifWatermark\target\e338596223da2e06c3e3efb486654191.jpg)
+![](\target\e338596223da2e06c3e3efb486654191.jpg)
 
-![IMG_20250330_160732_1](C:\Users\Gladious\Desktop\干活\AutoExifWatermark\target\IMG_20250330_160732_1.jpeg)
+![IMG_20250330_160732_1](\target\IMG_20250330_160732_1.jpeg)
 
 ---
 
