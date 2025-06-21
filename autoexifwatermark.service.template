@@ -1,0 +1,29 @@
+# AutoExifWatermark systemd Service File Template
+#
+# 1. 修改下面的路径和用户名以匹配您的系统。
+# 2. 将此文件复制到 /etc/systemd/system/autoexifwatermark.service
+#    (sudo cp autoexifwatermark.service.template /etc/systemd/system/autoexifwatermark.service)
+# 3. 运行 'sudo systemctl daemon-reload' 和 'sudo systemctl enable --now autoexifwatermark.service'
+
+[Unit]
+Description=AutoExifWatermark - Automated Photo Watermark Service
+After=network.target
+
+[Service]
+# --- 用户配置 ---
+# 请将 'your_user' 替换为运行此脚本的用户名
+User=your_user
+# 通常，用户组与用户名相同
+Group=your_user
+
+# --- 路径配置 ---
+# 将 '/path/to/your/AutoExifWatermark' 替换为项目的绝对路径
+WorkingDirectory=/path/to/your/AutoExifWatermark
+ExecStart=/path/to/your/AutoExifWatermark/venv/bin/python3 /path/to/your/AutoExifWatermark/autoexifwatermark.py
+
+# --- 服务管理 ---
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

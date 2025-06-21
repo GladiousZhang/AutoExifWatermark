@@ -75,25 +75,44 @@ pip install Pillow numpy scikit-learn
 
 #### 5. 设置为开机自启服务 (推荐用于服务器/NAS)
 
-1.  **编辑服务文件**: 使用您喜欢的编辑器修改 `photo_watermark.service` 模板文件，确保其中的`User`, `Group`, 和路径（`WorkingDirectory`, `ExecStart`）正确无误。
+为了让 **AutoExifWatermark** 在您的设备启动时自动运行，推荐使用`systemd`进行管理。
 
-2.  **部署服务文件**: 将编辑好的文件复制到`systemd`的目录中。
+1.  **准备服务文件**: 
+    项目根目录下提供了一个名为 `autoexifwatermark.service.template` 的模板文件。首先，请复制一份并重命名：
     ```bash
-    sudo cp photo_watermark.service /etc/systemd/system/photo_watermark.service
+    cp autoexifwatermark.service.template autoexifwatermark.service
     ```
 
-3.  **启动并启用服务**:
+2.  **编辑服务文件**: 
+    使用您喜欢的文本编辑器（如 `nano`）打开新创建的 `autoexifwatermark.service` 文件。
     ```bash
-    sudo systemctl daemon-reload
-    sudo systemctl enable photo_watermark.service
-    sudo systemctl start photo_watermark.service
+    nano autoexifwatermark.service
+    ```
+    您需要根据文件内的注释，修改以下**占位符**以匹配您的系统：
+    -   `User=your_user` -> 替换为您的用户名 (例如: `zsy`)
+    -   `Group=your_user` -> 替换为您的用户组名 (通常与用户名相同)
+    -   `/path/to/your/AutoExifWatermark` -> 替换为项目的**绝对路径** (例如: `/home/zsy/AutoExifWatermark`)
+    -   确保`ExecStart`中的Python脚本名 (`autoexifwatermark.py`) 与您的主脚本文件名一致。
+
+3.  **部署服务文件**: 将编辑好的文件复制到`systemd`的系统目录中。
+    ```bash
+    sudo cp autoexifwatermark.service /etc/systemd/system/
     ```
 
-4.  **检查服务状态**:
+4.  **启动并启用服务**:
     ```bash
-    sudo systemctl status photo_watermark.service
+    sudo systemctl daemon-reload          # 重新加载systemd配置
+    sudo systemctl enable autoexifwatermark.service # 设置开机自启
+    sudo systemctl start autoexifwatermark.service  # 立即启动服务
+    ```
+
+5.  **检查服务状态**:
+    ```bash
+    sudo systemctl status autoexifwatermark.service
     # 您应该会看到 'active (running)' 的绿色字样
     ```
+
+
 
 ### 🚀 如何使用
 
