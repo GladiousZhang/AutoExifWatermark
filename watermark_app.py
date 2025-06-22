@@ -147,7 +147,7 @@ def add_watermark_and_cleanup(source_path):
                 draw.rectangle([current_x, swatch_y + swatch_size/2, current_x + swatch_size, swatch_y + swatch_size], fill=darker_color)
 
         # --- 保存与清理 ---
-        new_img.save(dest_path, "JPEG", quality=95, exif=original_img.info.get('exif', b''))
+        new_img.save(dest_path, "JPEG", quality=100,subsampling=0, exif=original_img.info.get('exif', b''))
         os.remove(source_path)
         
         logging.info(f"处理完成: {filename} -> {dest_path}")
